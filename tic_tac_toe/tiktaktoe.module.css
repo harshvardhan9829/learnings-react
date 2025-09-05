@@ -1,0 +1,26 @@
+.container {
+    border: 1px solid green;
+    height: 10rem;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+    /* width: 20rem; */
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    color: black;
+}
+
+.body {
+    border: 1px solid white;
+
+}
+
+.game_head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-block: 2px solid gainsboro;
+}
