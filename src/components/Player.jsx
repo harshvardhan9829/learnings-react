@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Player = ({ initialName, symbol, isActive }) => {
+const Player = ({ initialName, symbol, isActive, updatePlayerName }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [playerName, setPlayerName] = useState(initialName)
 
@@ -9,6 +9,9 @@ const Player = ({ initialName, symbol, isActive }) => {
     }
     const handleEditClick = () => {
         setIsEditing((editing) => !editing)
+        if (isEditing) {
+            updatePlayerName(symbol, playerName)
+        }
     }
 
     let playerNameDiv = <span className="player-name">{playerName}</span>

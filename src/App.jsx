@@ -23,9 +23,22 @@ function derivedActivePlayer(gameTurns) {
 
 
 const App = () => {
+  const [players, setPlayers] = useState({
+    "X": "Player 1",
+    "O": "Player 2"
+  })
   const [gameTurns, setGameTurns] = useState([]);
 
   let gameBoard = [...initialGameBoard.map(arr => [...arr])]; // copying  array with array inside the array 
+
+  const handleUpdatePlayerName = (key, name) => {
+
+    const updatedPlayers = { ...players };
+    updatedPlayers[`${key}`] = name;
+    setPlayers(updatedPlayers)
+  }
+
+
   for (const turn of gameTurns) {
     const { square, player } = turn;
 
@@ -77,10 +90,10 @@ const App = () => {
     <main>
       <div id="game-container">
         <ol id="players" className='highlight-player'>
-          <Player initialName="Player 1" symbol="X" isActive={activePlayer === "X"} />
-          <Player initialName="Player 2" symbol="O" isActive={activePlayer === "O"} />
+          <Player initialName={players["X"]} updatePlayerName={handleUpdatePlayerName} symbol="X" isActive={activePlayer === "X"} />
+          <Player initialName={players["O"]} updatePlayerName={handleUpdatePlayerName} symbol="O" isActive={activePlayer === "O"} />
         </ol>
-        {(winner || hasDrawn) && <GameOver winner={winner} onRestart={handleResetGame} />}
+        {(winner || hasDrawn) && <GameOver winner={winner} players={players} onRestart={handleResetGame} />}
         <GameBoard onSelectSquare={handleSelectSquare} gameBoard={gameBoard} />
       </div>
       <Log turns={gameTurns} />
