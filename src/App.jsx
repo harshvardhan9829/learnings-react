@@ -31,11 +31,18 @@ const App = () => {
 
   let gameBoard = [...initialGameBoard.map(arr => [...arr])]; // copying  array with array inside the array 
 
-  const handleUpdatePlayerName = (key, name) => {
+  const handleUpdatePlayerName = (symbol, newName) => {
+    // best practice
+    setPlayers((prevPlayers => {
+      return {
+        ...prevPlayers,
+        [symbol]: newName // [symbol] javascript method to set the key and update the key value dynamically 
+      }
+    }))
 
-    const updatedPlayers = { ...players };
-    updatedPlayers[`${key}`] = name;
-    setPlayers(updatedPlayers)
+    // const updatedPlayers = { ...players };
+    // updatedPlayers[`${key}`] = name;
+    // setPlayers(updatedPlayers)
   }
 
 
@@ -59,7 +66,7 @@ const App = () => {
     const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column]
 
     if (firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol == thirdSquareSymbol) {
-      winner = firstSquareSymbol
+      winner = players[firstSquareSymbol]
     }
 
 
