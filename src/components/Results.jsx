@@ -8,7 +8,18 @@ const Results = ({ inputData }) => {
         expectedReturn: inputData.expReturn,
         duration: inputData.duration,
     })
-    const initialInvestment = calculatedData[0].valueEndOfYear - calculatedData[0].interest - calculatedData[0].annualInvestment
+
+    if (calculatedData.length === 0) {
+        return <p className='center'>Invalid input data provided</p>
+    }
+    const initialInvestment =
+        calculatedData[0].valueEndOfYear -
+        calculatedData[0].interest -
+        calculatedData[0].annualInvestment
+    // const initialInvestment =
+    //     calculatedData[0].valueEndOfYear -
+    //     calculatedData[0].interest -
+    //     calculatedData[0].annualInvestment
     return (
         <table id="result">
             <thead>
@@ -22,7 +33,10 @@ const Results = ({ inputData }) => {
             </thead>
             <tbody>
                 {calculatedData.length && calculatedData.map((data, index) => {
-                    const totalInterest = data.valueEndOfYear - data.annualInvestment * data.year - initialInvestment
+                    const totalInterest =
+                        data.valueEndOfYear -
+                        data.annualInvestment * data.year -
+                        initialInvestment
                     const totalAmountInvestment = data.valueEndOfYear - totalInterest;
                     return (
                         <tr key={data.year}>

@@ -15,6 +15,7 @@ function App() {
   const isInputValid = (inputData.duration >= 1);
 
   const handleInputChange = (e) => {
+
     const { name, value } = e.target;
     setInputData((prevData) => ({
       ...prevData,
